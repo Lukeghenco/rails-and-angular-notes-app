@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="notesApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Angular and Rails Notes App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.css">
+    <link rel="stylesheet" href="notes.scss">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/110131/angular-markdown-editable.js"></script>
+    <script type="text/javascript" src="notes.js"></script>
+  </head>
+  <body ng-controller="notesController">
+    <h1 class="header">Notes</h1>
+    <div class="app">
+      <span class="icons">
+        <i class="fa fa-plus-circle fa-2x" ng-click="createNote()"></i>
+      </span>
+      <div class="note" ng-repeat="note in notes | orderBy:'createdOn':true track by $index">
+        <span class="date">
+          {{ note.createdOn | date:"EEEE dd MMMM, yyyy 'at' h:mma"}}
+        </span>
+        <span class="icons">
+          <i class="fa fa-check fa-lg" ng-if="note.edit == false"></i>
+          <i class="fa fa-pencil fa-lg" ng-if="note.edit == true"></i>
+          <i class="fa fa-trash-o fa-lg" ng-click="delete(notes.length - $index -1)"></i>
+        </span>
+        <div class="note-title" ng-model="note.title" cg-change="update(notes.length - $index - 1, note.title)" ng-focu="note.edit = true" ng-blur="note.edit = false" markdown-editable contenteditable="true">
+          <h3>{{ note.title }}</h3>
+        </div>
+        <div class="note-content" ng-model="note.content" ng-change="update(notes.length - $index - 1,note.content)" ng-focus="note.edit = true" ng-blur="note.edit = false" markdown-editable contenteditable="true">
+          {{ note.content }}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

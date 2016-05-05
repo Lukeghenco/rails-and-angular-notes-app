@@ -1,38 +1,42 @@
 module Api
   class NotesController < ApplicationController
+    skip_before_filter :verify_authenticity_token
     respond_to :json
 
     def index
-      @notes = Note.all
-      render json: @notes
-    end
-
-    def new
-      @note = Note.new
+      respond_with(Note.all)
     end
 
     def create
-      @note = Note.create(note_params)
+      @note = Note.new(note_params)
+      if @note.save
+        respond_to do |format|
+          format.json { render :json => @note }
+        end
+      end
     end
 
     def update
       @note = Note.find(params[:id])
-      @note.save
+      if @note.update(note_params)
+        respond_to do |format|
+          format.json { render :json => @note }
+        end
+      end
     end
 
     def show
-      @note = Note.find(params[:id])
-      render json: @note
+      respond_with(Note.find(params[:id]))
     end
 
     def destroy
-      @note = Note.find(params[:id])
+      respond_with(Note.destroy(params[:id]))
     end
 
     private
 
       def note_params
-        params.require(:notes).permit(:title, :content)
+        params.require(:note).permit(:title, :content)
       end
 
   end

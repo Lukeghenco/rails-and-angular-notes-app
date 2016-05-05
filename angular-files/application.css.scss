@@ -1,0 +1,152 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "font-awesome";
+
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
+@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  max-width:600px;
+  margin:auto;
+  padding:10px;
+  position:relative;
+  background: #ecf0f1;
+}
+
+div.note:hover {
+  border: 2px solid #d35400;
+}
+
+div.note-content[contenteditable] {
+  font-size:1.2em;
+  font-family: 'Source Sans Pro', sans-serif;
+  border:none;
+  box-shadow:none;
+  margin:0;
+  width:100%;
+  padding:10px 20px 10px;
+  min-height:300px;
+  background:#fff;
+}
+
+div.note-title[contenteditable] {
+  font-size:1.2em;
+  font-family: 'Source Sans Pro', sans-serif;
+  border:none;
+  box-shadow:none;
+  margin:0;
+  width:100%;
+  padding:10px 20px 6px;
+  min-height:20px;
+  background:#fff;
+}
+
+div[contenteditable]:focus{
+ font-family: 'Source Code Pro', courier, monospace;
+  font-size:1em;
+}
+
+.header {
+  margin: 20px auto 0;
+  color:#c0392b;
+  text-align: center;
+}
+
+.note-title {
+  margin: -16px 0 0 0;
+  padding-left: 16px;
+  color: #c0392b;
+}
+
+.note {
+  background: #f9f9f9;
+  box-shadow:#999 1px 1px 3px;
+  margin:30px 0;
+  padding-top:40px;
+  min-height:200px;
+  width:100%;
+  display:block;
+  position:relative;
+  overflow:hidden;
+}
+
+.date {
+  position:absolute;
+  top:0;
+  left:0;
+  padding:15px;
+  font-size:0.9em;
+  font-style: italic;
+  color: #2980b9;
+}
+
+.icons {
+  position:absolute;
+  right:0;
+  top:0;
+  padding:10px;
+}
+
+.fa-trash-o, .fa-plus-circle {
+  cursor:pointer;
+  width: 24px;
+}
+
+.fa-check {
+  font-size: 24px;
+  color:#92D788;
+}
+
+.fa-trash-o {
+  color:#C2474B;
+  font-size:24px;
+
+  &:hover {
+    color:darken(#C2474B,20);
+  }
+}
+
+.fa-pencil {
+  color:#f39c12;
+  font-size: 24px;
+}
+
+.new-note {
+  position: absolute;
+  margin:5px 10px 0;
+  font-size: 20px;
+  color: #d35400;
+  right:90px;
+  top:2px;
+}
+
+.fa-plus-circle {
+  color:#2980b9;
+  font-size: 24px;
+
+  &:hover {
+    color:darken(#c0392b,15);
+  }
+}
+
+@media (max-width: 550px) {
+  .new-note {
+    left: 0px;
+    top:2px;
+  }
+
+  .date {
+    display:none;
+  }
+}

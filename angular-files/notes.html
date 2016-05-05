@@ -1,0 +1,24 @@
+<h1 class="header">Notes</h1>
+<div class="app">
+
+  <div class="note" ng-repeat="note in notes | orderBy:'created_at':true track by $index">
+    <span class="date">
+      Created On: {{ note.created_at | date:"EEEE dd MMMM, yyyy 'at' h:mma"}}
+    </span>
+    <span class="new-note">
+      New Note
+      <i class="fa fa-plus-circle fa-2x" ng-click="createNote()"></i>
+    </span>
+    <span class="icons">
+      <i class="fa fa-check fa-lg" ng-if="note.edit == false"></i>
+      <i class="fa fa-pencil fa-lg" ng-if="note.edit == true"></i>
+      <i class="fa fa-trash-o fa-lg" ng-click="delete(note)"></i>
+    </span>
+    <div class="note-title" ng-model="note.title" cg-change="update(note)" ng-focus="note.edit = true" ng-blur="note.edit = false" markdown-editable contenteditable="true">
+      <h3>{{ note.title }}</h3>
+    </div>
+    <div class="note-content" ng-model="note.content" ng-change="update(note)" ng-focus="note.edit = true" ng-blur="note.edit = false" markdown-editable contenteditable="true">
+      {{ note.content }}
+    </div>
+  </div>
+</div>
